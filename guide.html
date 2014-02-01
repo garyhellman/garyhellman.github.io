@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content="AsciiDoc 8.6.9">
+<title>Getting Started Developing Applications</title>
+<style type="text/css">
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+h5 {
+  font-size: 1.0em;
+}
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
+
+.monospaced, code, pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: inherit;
+  color: navy;
+  padding: 0;
+  margin: 0;
+}
+pre {
+  white-space: pre-wrap;
+}
+
+#author {
+  color: #527bbd;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#email {
+}
+#revnumber, #revdate, #revremark {
+}
+
+#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #f0f0f0;
+  color: #888;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; vertical-align: text-bottom; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toc {
+  margin-bottom: 2.5em;
+}
+
+#toctitle {
+  color: #527bbd;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel0, div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+div.unbreakable { page-break-inside: avoid; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
+
+.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
+.highlight .c { color: #408080; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #808080 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0040D0 } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #7D9029 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight .no { color: #880000 } /* Name.Constant */
+.highlight .nd { color: #AA22FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0000FF } /* Name.Function */
+.highlight .nl { color: #A0A000 } /* Name.Label */
+.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mf { color: #666666 } /* Literal.Number.Float */
+.highlight .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
+
+@media screen {
+  body {
+    max-width: 50em; /* approximately 80 characters wide */
+    margin-left: 16em;
+  }
+
+  #toc {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 13em;
+    padding: 0.5em;
+    padding-bottom: 1.5em;
+    margin: 0;
+    overflow: auto;
+    border-right: 3px solid #f8f8f8;
+    background-color: white;
+  }
+
+  #toc .toclevel1 {
+    margin-top: 0.5em;
+  }
+
+  #toc .toclevel2 {
+    margin-top: 0.25em;
+    display: list-item;
+    color: #aaaaaa;
+  }
+
+  #toctitle {
+    margin-top: 0.5em;
+  }
+}
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
+  var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
+}
+
+}
+asciidoc.install(2);
+/*]]>*/
+</script>
+</head>
+<body class="book">
+<div id="header">
+<h1>Getting Started Developing Applications</h1>
+<span id="author">Pete Muir</span><br>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<h1 id="_introduction">Introduction</h1>
+<div class="paragraph"><p>This guide will walk you through installing and starting up JBoss Enterprise Application Platform 6. It will then introduce key features of the Java EE 6 (Web Profile) programming model, of which JBoss EAP 6 is a certified implementation.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="gfx/icons/tip.png" alt="Tip">
+</td>
+<td class="content">
+<div class="title">Java EE 6</div>
+<div class="paragraph"><p>The Java EE 6 platform offers developers the ability to write
+distributed, transactional and portable applications quickly and easily.
+We class applications that require these capabilities "enterprise
+applications". These applications must be fast, secure and reliable.</p></div>
+<div class="paragraph"><p>Java EE has always offered strong messaging (JMS), transactional (JTA)
+and resource (JCA) capabilities as well as exposing web services via
+SOAP (JAX-WS). Java EE 5 started a radical shift for the programming
+model, offering a powerful, declarative and lightweight
+object-relational mapper (JPA) and  annotation-driven, lightweight
+access to enterprise services (EJB 3). Java EE 6 added a type-safe,
+loosely coupled programming model (CDI), declarative validation of
+constraints (Bean Validation) and RESTful web services (JAX-RS) to
+produce a complete, modern development environment.</p></div>
+</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>JBoss Enterprise Application Platform 6 departs from the familiar structure of previous JBoss EAP versions, so we recommend all developers follow the steps in <a href="#GettingStarted-">Getting Started with JBoss Enterprise Application Platform 6</a> to install and start up the application server for the first time.</p></div>
+<div class="paragraph"><p>JBoss Enterprise Application Platform 6 comes with a series of quickstarts aimed to get you up to writing applications with minimal fuss. We recommend that start by working through the quickstarts in this guide, in the order they are presented. If you have previous experience with Java EE 6, you may wish to skip some or all of the quickstarts.</p></div>
+<div class="paragraph"><p><strong>Core</strong></p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+<a href="#HelloworldQuickstart-">Helloworld Quickstart</a>. If you have previously developed applications using technologies such as JSF or Wicket, and EJB or Spring, you may wish to skip this quickstart.
+</p>
+</li>
+<li>
+<p>
+<a href="#NumberguessQuickstart-">Numberguess Quickstart</a>. If you have previously developed applications using technologies such as JSF or Wicket, EJB or Spring, and JPA or Hibernate you may wish to skip this quickstart.
+</p>
+</li>
+<li>
+<p>
+<a href="#GreeterQuickstart-">Greeter Quickstart</a>. If you are a Java EE wizard you may wish to skip this quickstart.
+</p>
+</li>
+<li>
+<p>
+<a href="#KitchensinkQuickstart-">Kitchensink Quickstart</a>. A great starting point for your project.
+</p>
+</li>
+</ol></div>
+<div class="paragraph"><p><strong>Optional</strong></p></div>
+<div class="olist arabic"><ol class="arabic" start="5">
+<li>
+<p>
+<a href="#HelloworldOSGiQuickstart-">OSGi Helloworld Quickstart</a>. If you want to get started with OSGi, check out this quickstart.
+</p>
+</li>
+</ol></div>
+<div class="sect1">
+<h2 id="_downloading_the_quickstarts">Downloading the quickstarts</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The quickstarts are are available for download from <a href="http://www.jboss.org/jdf/quickstarts/get-started">JBoss Developer Framework</a>. Make sure you download the latest zip!</p></div>
+</div>
+</div>
+<h1 id="_getting_started_with_jboss_enterprise_application_platform_6">Getting started with JBoss Enterprise Application Platform 6</h1>
+<div class="paragraph" id="GettingStarted-"><p>To run the quickstarts with the provided build scripts, you&#8217;ll need:</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="gfx/icons/tip.png" alt="Tip">
+</td>
+<td class="content">
+<div class="paragraph"><p>If you already have any of these pieces of software, there is no need to
+install them again!</p></div>
+</td>
+</tr></table>
+</div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+Java 1.6, to run JBoss EAP and Maven
+</dt>
+<dd>
+<p>
+  Choose your Java runtime, and follow their installation instructions. For example, you could choose one of:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://openjdk.java.net/install/">OpenJDK</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.oracle.com/technetwork/java/javase/index-137561.html">Oracle Java SE</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://download.oracle.com/docs/cd/E15289_01/doc.40/e15065/toc.htm">Oracle JRockit</a>
+</p>
+</li>
+</ul></div>
+</dd>
+<dt class="hdlist1">
+Maven 3, to build and deploy the quickstarts
+</dt>
+<dd>
+<p>
+  Follow the official Maven installation guide if you don&#8217;t already have Maven 3 installed. You can check which version of Maven you have installed (if any) by running <span class="monospaced">mvn --version</span> . If you see a version newer than 3.0.0, you are ready to go.
+</p>
+</dd>
+</dl></div>
+<div class="paragraph"><p>Make sure you have:</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+The JBoss Enterprise Application Platform 6 runtime
+</dt>
+<dd>
+<p>
+  <a href="http://www.jboss.org/products/eap/">Red Hat JBoss Products</a>
+</p>
+</dd>
+<dt class="hdlist1">
+The JBoss Enterprise Application Platform 6 quickstarts
+</dt>
+<dd>
+<p>
+  <a href="http://www.jboss.org/jdf/quickstarts/get-started/">Quickstarts: Get Started</a>
+</p>
+</dd>
+</dl></div>
+<div class="paragraph"><p>If you wish to use the examples from an IDE, we recommend using JBoss Developer Studio, or Eclipse with JBoss Tools.</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+JBoss Developer Studio
+</dt>
+<dd>
+<p>
+  Download JBDS from <a href="http://devstudio.jboss.com/download/">http://devstudio.jboss.com/download/</a>. JBDS includes JBoss Enterprise Application Platform.
+</p>
+</dd>
+<dt class="hdlist1">
+Eclipse, with JBoss Tools
+</dt>
+<dd>
+<p>
+  Download JBoss Tools from <a href="http://jboss.org/tools">http://jboss.org/tools</a>. Make sure you install m2eclipse as well.
+</p>
+</dd>
+</dl></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="gfx/icons/tip.png" alt="Tip">
+</td>
+<td class="content">
+<div class="paragraph"><p>JBoss Enterprise Application Platform 6 offers the
+ability to manage multiple EAP instances from a single control point.
+A collection of such servers are referred to as members of a "domain",
+with a single Domain Controller process acting as the management control
+point. Domains can span multiple physical (or virtual) machines, with
+all EAP instances on a given host under the control of a Host Controller
+process. The Host Controllers interact with the Domain Controller to
+control the lifecycle of the EAP instances running on that host and to
+assist the Domain Controller in managing them.</p></div>
+<div class="paragraph"><p>JBoss EAP 6 also offers a standalone mode, which is perfect for a single
+server. We use this throughout the quickstarts.</p></div>
+</td>
+</tr></table>
+</div>
+<div class="sect1">
+<h2 id="_installing_and_starting_the_jboss_server_on_linux_unix_or_mac_os_x">Installing and starting the JBoss server on Linux, Unix or Mac OS X</h2>
+<div class="sectionbody">
+<div class="paragraph" id="GettingStarted-on_linux"><p>First, let&#8217;s verify that verify that both Java and Maven are correctly
+installed. In a console, type:</p></div>
+<div class="literalblock">
+<div class="content monospaced">
+<pre>java -version</pre>
+</div></div>
+<div class="paragraph"><p>You should see a version string (at least <span class="monospaced">1.6.0</span>) printed. If not, contact your provider of Java for assistance. Next, type:</p></div>
+<div class="literalblock">
+<div class="content monospaced">
+<pre>mvn --version</pre>
+</div></div>
+<div class="paragraph"><p>You should see a version string (at lest <span class="monospaced">3.0.0</span>) printed. If not, contact the Maven community for assistance.</p></div>
+<div class="paragraph"><p>Next, we need to choose a location for JBoss EAP to live. By default, JBoss EAP will be extracted into <span class="monospaced">jboss-eap.6.x.x</span> (where <span class="monospaced">6.x.x</span> matches the version you downloaded):</p></div>
+<div class="literalblock">
+<div class="content monospaced">
+<pre>unzip jboss-eap-6.2.x.zip</pre>
+</div></div>
+<div class="paragraph"><p>Now, let&#8217;s start JBoss EAP in standalone mode:</p></div>
+<div class="literalblock">
+<div class="content monospaced">
+<pre>jboss-eap-6.2.x/bin/standalone.sh</pre>
+</div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="gfx/icons/tip.png" alt="Tip">
+</td>
+<td class="content">
+<div class="paragraph"><p>If you want to stop JBoss EAP, simply press Crtl-C whilst the terminal
+has focus.</p></div>
+</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>That&#8217;s it, JBoss EAP is installed and running! Visit <a href="http://localhost:8080/">http://localhost:8080/</a> to check the server has started properly.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="gfx/icons/tip.png" alt="Tip">
+</td>
+<td class="content">
+<div class="paragraph"><p>You can find the server log for standalone instances in
+<span class="monospaced">jboss-eap-6.x.x/standalone/log/server.log</span>. The
+<a href="https://access.redhat.com/site/documentation/JBoss_Enterprise_Application_Platform/">Administration and Configuration Guide for JBoss Enterprise Application Platform 6</a> covers more on configuring logging.</p></div>
+</td>
+</tr></table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installing_and_starting_the_jboss_server_on_windows">Installing and starting the JBoss server on Windows</h2>
+<div class="sectionbody">
+<div class="paragraph" id="GettingStarted-on_windows"><p>First, let&#8217;s verify that verify that both Java and Maven are correctly installed. In a Command Prompt, type:</p></div>
+<div class="literalblock">
+<div class="content monospaced">
+<pre>java -version</pre>
+</div></div>
+<div class="paragraph"><p>You should see a version string (at least <span class="monospaced">1.6.0</span>) printed. If not, contact your provider of Java for assistance. Next, type:</p></div>
+<div class="literalblock">
+<div class="content monospaced">
+<pre>mvn --version</pre>
+</div></div>
+<div class="paragraph"><p>You should see a version string (at lest <span class="monospaced">3.0.0</span>) printed. If not, contact the Maven community for assistance.</p></div>
+<div class="paragraph"><p>Next, we need to choose a location for JBoss Enterprise Application Platform 6 to live. By default, JBoss EAP 6 will be extracted into <span class="monospaced">jboss-eap-6.x.x</span> (where <span class="monospaced">6.x.x</span> matches the version you downloaded). Unzip JBoss Enterprise Application Platform using your tool of choice.</p></div>
+<div class="paragraph"><p>Finally, let&#8217;s start JBoss Enterprise Application Platform in standalone mode. Locate your installation and run <span class="monospaced">standalone.bat</span> located in <span class="monospaced">bin</span>.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="gfx/icons/tip.png" alt="Tip">
+</td>
+<td class="content">
+<div class="paragraph"><p>If you want to stop the server, simply press Crtl-C whilst the terminal
+has focus.</p></div>
+</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>That&#8217;s it, JBoss Enterprise Application Platform 6 is installed and running! Visit <a href="http://localhost:8080/">http://localhost:8080/</a> to check the server has started properly.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="gfx/icons/tip.png" alt="Tip">
+</td>
+<td class="content">
+<div class="paragraph"><p>You can find the server log for standalone instances in
+<span class="monospaced">jboss-as-6.x.x/standalone/log/server.log</span>. The
+<a href="https://access.redhat.com/site/documentation/JBoss_Enterprise_Application_Platform/">Administration and Configuration Guide for JBoss Enterprise Application Platform 6</a> covers more on configuring logging.</p></div>
+</td>
+</tr></table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_starting_the_jboss_server_from_jbds_or_eclipse_with_jboss_tools">Starting the JBoss server from JBDS or Eclipse with JBoss Tools</h2>
+<div class="sectionbody">
+<div class="paragraph" id="GettingStarted-with_jboss_tools"><p>You may choose to use JBoss Developer Studio, or Eclipse with JBoss Tools, rather than the command line to run JBoss Enterprise Application Platform 6 and to deploy the quickstarts. If you don&#8217;t wish to use Eclipse, you should skip this section.</p></div>
+<div class="paragraph"><p>Make sure you have installed and started JBoss Developer Studio or Eclipse. First, we need to add our JBoss EAP instance to it. First, navigate to <em>Preferences</em>:</p></div>
+<div class="paragraph"><p><span class="image">
+<img src="gfx/Eclipse_Detect_Servers_1.png" alt="gfx/Eclipse_Detect_Servers_1.png">
+</span></p></div>
+<div class="paragraph"><p>Now, locate the <em>JBoss Tools Runtime Detection</em> preferences:</p></div>
+<div class="paragraph"><p><span class="image">
+<img src="gfx/Eclipse_Detect_Servers_2.png" alt="gfx/Eclipse_Detect_Servers_2.png">
+</span></p></div>
+<div class="paragraph"><p>Click <em>Add</em> and locate where you put servers on your disk:</p></div>
+<div class="paragraph"><p><span class="image">
+<img src="gfx/Eclipse_Detect_Servers_3.png" alt="gfx/Eclipse_Detect_Servers_3.png">
+</span></p></div>
+<div class="paragraph"><p>Any available servers will be located, now all you need to do is click <em>OK</em>, and then <em>OK</em> on the preferences dialog:</p></div>
+<div class="paragraph"><p><span class="image">
+<img src="gfx/Eclipse_Detect_Servers_4.png" alt="gfx/Eclipse_Detect_Servers_4.png">
+</span></p></div>
+<div class="paragraph"><p>Now, let&#8217;s start the server from Eclipse. If you previously started a server from the command line, you should stop it there first.</p></div>
+<div class="paragraph"><p>First, we need to make sure the Server tab is on view. Open the <em>Window &#8594; Show View &#8594; Other&#8230;</em> dialog:</p></div>
+<div class="paragraph"><p><span class="image">
+<img src="gfx/Eclipse_Server_Tab_1.jpg" alt="gfx/Eclipse_Server_Tab_1.jpg">
+</span></p></div>
+<div class="paragraph"><p>And select the Server view:</p></div>
+<div class="paragraph"><p><span class="image">
+<img src="gfx/Eclipse_Server_Tab_2.jpg" alt="gfx/Eclipse_Server_Tab_2.jpg">
+</span></p></div>
+<div class="paragraph"><p>You should see the Server View appear with the detected servers:</p></div>
+<div class="paragraph"><p><span class="image">
+<img src="gfx/Eclipse_Server_Tab_3.jpg" alt="gfx/Eclipse_Server_Tab_3.jpg">
+</span></p></div>
+<div class="paragraph"><p>Now, we can start the server. Right click on the server in the Server view, and select Start :</p></div>
+<div class="paragraph"><p><span class="image">
+<img src="gfx/Eclipse_Server_Start_1.jpg" alt="gfx/Eclipse_Server_Start_1.jpg">
+</span></p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="gfx/icons/tip.png" alt="Tip">
+</td>
+<td class="content">
+<div class="paragraph"><p>If you want to debug your application, you can simply select Debug
+rather than Start . This will start the server in debug mode, and
+automatically attach the Eclipse debugger.</p></div>
+</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>You&#8217;ll see the server output in the Console :</p></div>
+<div class="paragraph"><p><span class="image">
+<img src="gfx/Eclipse_Server_Start_2.jpg" alt="gfx/Eclipse_Server_Start_2.jpg">
+</span></p></div>
+<div class="paragraph"><p>That&#8217;s it, we now have the server up and running in Eclipse!</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_importing_the_quickstarts_into_eclipse">Importing the quickstarts into Eclipse</h2>
+<div class="sectionbody">
+<div class="paragraph" id="GettingStarted-importing_quickstarts_into_eclipse"><p>In order to import the quickstarts into Eclipse, you will need m2eclipse installed. If you have JBoss Developer Studio, then m2eclipse is already installed.</p></div>
+<div class="paragraph"><p>First, choose <em>File &#8594; Import&#8230;</em>:</p></div>
+<div class="paragraph"><p><span class="image">
+<img src="gfx/Import_Quickstarts_1.jpg" alt="gfx/Import_Quickstarts_1.jpg">
+</span></p></div>
+<div class="paragraph"><p>Select <em>Existing Maven Projects</em>:</p></div>
+<div class="paragraph"><p><span class="image">
+<img src="gfx/Import_Quickstarts_2.jpg" alt="gfx/Import_Quickstarts_2.jpg">
+</span></p></div>
+<div class="paragraph"><p>Click on <em>Browse</em>, and navigate to the <span class="monospaced">quickstarts/</span> directory:</p></div>
+<div class="paragraph"><p><span class="image">
+<img src="gfx/Import_Quickstarts_3.jpg" alt="gfx/Import_Quickstarts_3.jpg">
+</span></p></div>
+<div class="paragraph"><p>Finally, make sure all 4 quickstarts are found and selected, and click <em>Finish</em>:</p></div>
+<div class="paragraph"><p><span class="image">
+<img src="gfx/Import_Quickstarts_4.jpg" alt="gfx/Import_Quickstarts_4.jpg">
+</span></p></div>
+<div class="paragraph"><p>Eclipse should now successfully import 4 projects:</p></div>
+<div class="paragraph"><p><span class="image">
+<img src="gfx/Import_Quickstarts_5.jpg" alt="gfx/Import_Quickstarts_5.jpg">
+</span></p></div>
+<div class="paragraph"><p>It will take a short time to import the projects, as Maven needs to download the project&#8217;s dependencies from remote repositories.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_managing_jboss_enterprise_application_platform_6">Managing JBoss Enterprise Application Platform 6</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Here we will quickly outline how you can access both the command line interface and the web management interface for managing JBoss Enterprise Application Platform 6. Detailed information can be found in the <a href="https://access.redhat.com/site/documentation/JBoss_Enterprise_Application_Platform/">Administration and Configuration Guide for JBoss Enterprise Application Platform 6</a>.</p></div>
+<div class="paragraph"><p>When the server is running, the web management interface can be accessed at <a href="http://localhost:9990/console">http://localhost:9990/console</a>. You can use the web management interface to create datasources, manage deployments and configure the server.</p></div>
+<div class="paragraph"><p>JBoss Enterprise Application Platform 6 comes with a command line interface. To run it on Linux, Unix or Mac, execute:</p></div>
+<div class="literalblock">
+<div class="content monospaced">
+<pre>jboss-eap-6.x.x/bin/jboss-admin.sh --connect</pre>
+</div></div>
+<div class="paragraph"><p>Or, on Windows:</p></div>
+<div class="literalblock">
+<div class="content monospaced">
+<pre>jboss-eap-6.x.x/bin/jboss-admin.bat --connect</pre>
+</div></div>
+<div class="paragraph"><p>Once started, type help to discover the commands available to you.</p></div>
+<div class="paragraph"><p>Throughout this guide we use the <span class="monospaced">jboss-as</span> maven plugin to deploy and undeploy applications. This plugin uses the Native Java Detyped Management API to communicate with the server. The Detyped API is used by management tools to control an entire domain of servers, and exposes only a small number of types, allowing for backwards and forwards compatibility.</p></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr></div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2013-12-07 11:19:55 EST
+</div>
+</div>
+</body>
+</html>
